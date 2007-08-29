@@ -1,9 +1,9 @@
 %define		_snap	01022007
-%define		_ver	%(y=$(echo %{_snap} | cut -c5-8); m=$(echo %{_snap} | cut -c1-2); d=$(echo %{_snap} | cut -c3-4); echo $y$m$d)
+%define		_ver	%(echo %{_snap} | sed -e 's,\\(..\\)\\(..\\)\\(....\\),\\3\\1\\2,')
 Summary:	Multitemplate for DokuWiki
 Name:		dokuwiki-tpl-multitemplate
 Version:	%{_ver}
-Release:	0.1
+Release:	0.2
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://tatewake.com/wiki/_media/projects:multitemplate-%{_snap}.zip
