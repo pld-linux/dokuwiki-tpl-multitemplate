@@ -3,7 +3,7 @@
 Summary:	Multitemplate for DokuWiki
 Name:		dokuwiki-tpl-multitemplate
 Version:	%{_ver}
-Release:	0.2
+Release:	0.3
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://tatewake.com/wiki/_media/projects:multitemplate-%{_snap}.zip
@@ -24,14 +24,27 @@ namespace (or page) you wish.
 %prep
 %setup -q -n %{_tpl}
 
+cat > INSTALL <<'EOF'
+To activate this template add something like this to your conf/local.php file: 
+
+$multitemplate['playground'] = 'default';
+$multitemplate[''] = 'monobook';
+
+and
+$conf['template'] = 'multitemplate';
+
+EOF
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_tpldir}
 cp -a . $RPM_BUILD_ROOT%{_tpldir}
+rm -f $RPM_BUILD_ROOT%{_tpldir}/INSTALL
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc INSTALL
 %{_tpldir}
