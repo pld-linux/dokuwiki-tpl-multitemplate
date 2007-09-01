@@ -1,6 +1,7 @@
 %define		_snap	01022007
 %define		_ver	%(echo %{_snap} | sed -e 's,\\(..\\)\\(..\\)\\(....\\),\\3\\1\\2,')
 Summary:	Multitemplate for DokuWiki
+Summary(pl.UTF-8):	Wielokrotne szablony dla DokuWiki
 Name:		dokuwiki-tpl-multitemplate
 Version:	%{_ver}
 Release:	0.3
@@ -14,12 +15,16 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_dokudir	/usr/share/dokuwiki
-%define		_tpldir		%{_dokudir}/lib/tpl/%{_tpl}
 %define		_tpl		multitemplate
+%define		_tpldir		%{_dokudir}/lib/tpl/%{_tpl}
 
 %description
 This template allows you to use any templates you wish for any
 namespace (or page) you wish.
+
+%description -l pl.UTF-8
+Ten szablon pozwala na używanie dowolnie wybranych szablonów dla
+dowolnej przestrzeni nazw (lub strony).
 
 %prep
 %setup -q -n %{_tpl}
