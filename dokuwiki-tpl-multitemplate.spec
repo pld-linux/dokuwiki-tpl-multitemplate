@@ -1,5 +1,6 @@
 %define		_snap	01022007
 %define		_ver	%(echo %{_snap} | sed -e 's,\\(..\\)\\(..\\)\\(....\\),\\3\\1\\2,')
+%define		_tpl	multitemplate
 Summary:	Multitemplate for DokuWiki
 Summary(pl.UTF-8):	Wielokrotne szablony dla DokuWiki
 Name:		dokuwiki-tpl-multitemplate
@@ -15,7 +16,6 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_dokudir	/usr/share/dokuwiki
-%define		_tpl		multitemplate
 %define		_tpldir		%{_dokudir}/lib/tpl/%{_tpl}
 
 %description
@@ -30,13 +30,13 @@ dowolnej przestrzeni nazw (lub strony).
 %setup -q -n %{_tpl}
 
 cat > INSTALL <<'EOF'
-To activate this template add something like this to your conf/local.php file: 
+To activate this template add something like this to your conf/local.php file:
 
+$conf['template'] = '%{_tpl}';
+
+and configure defaults:
 $multitemplate['playground'] = 'default';
 $multitemplate[''] = 'monobook';
-
-and
-$conf['template'] = 'multitemplate';
 
 EOF
 
