@@ -1,20 +1,21 @@
-%define		_snap	01022007
-%define		_ver	%(echo %{_snap} | sed -e 's,\\(..\\)\\(..\\)\\(....\\),\\3\\1\\2,')
+%define		snap	01022007
+%define		ver	%(echo %{snap} | sed -e 's,\\(..\\)\\(..\\)\\(....\\),\\3\\1\\2,')
 %define		tpl	multitemplate
 Summary:	Multitemplate for DokuWiki
 Summary(pl.UTF-8):	Wielokrotne szablony dla DokuWiki
 Name:		dokuwiki-tpl-multitemplate
-Version:	%{_ver}
+Version:	%{ver}
 Release:	1
 License:	GPL v2
 Group:		Applications/WWW
-Source0:	http://tatewake.com/wiki/_media/projects:multitemplate-%{_snap}.zip
+Source0:	http://tatewake.com/wiki/_media/projects:multitemplate-%{snap}.zip
 # Source0-md5:	b1d36f8b69439c8e0c67703fa0425238
 URL:		http://tatewake.com/wiki/projects:multitemplate_for_dokuwiki
 Requires:	dokuwiki
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		dokuconf	/etc/webapps/dokuwiki
 %define		dokudir		/usr/share/dokuwiki
 %define		tpldir		%{dokudir}/lib/tpl/%{tpl}
 
@@ -48,6 +49,12 @@ rm -f $RPM_BUILD_ROOT%{tpldir}/INSTALL
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+# force css cache refresh
+if [ -f %{dokuconf}/local.php ]; then
+	touch %{dokuconf}/local.php
+fi
 
 %files
 %defattr(644,root,root,755)
