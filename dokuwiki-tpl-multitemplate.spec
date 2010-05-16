@@ -11,6 +11,7 @@ Group:		Applications/WWW
 Source0:	http://tatewake.com/wiki/_media/projects:multitemplate-%{snap}.zip
 # Source0-md5:	b1d36f8b69439c8e0c67703fa0425238
 URL:		http://tatewake.com/wiki/projects:multitemplate_for_dokuwiki
+BuildRequires:	unzip
 Requires:	dokuwiki
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
